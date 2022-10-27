@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -72,6 +73,14 @@ class ControlActivity : AppCompatActivity(), ReceiveThread.Listener {
     override fun onReceive(message: String) {
         runOnUiThread {
             binding.tvMessage.text = message
+            var vind = binding.ivVindAngle
+            var boatAngle = binding.ivBoatAngle
+            var degre = message.toFloatOrNull()
+            if (degre != null) {
+                vind.rotation = degre * 4
+                boatAngle.rotation = degre
+
+            }
 
         }
 
