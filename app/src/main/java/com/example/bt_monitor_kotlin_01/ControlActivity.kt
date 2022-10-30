@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.bt_monitor_kotlin_01.databinding.ActivityControlBinding
+import java.util.regex.Pattern
 
 
 class ControlActivity : AppCompatActivity(), ReceiveThread.Listener {
@@ -70,17 +71,39 @@ class ControlActivity : AppCompatActivity(), ReceiveThread.Listener {
         }
     }
 
+
     override fun onReceive(message: String) {
         runOnUiThread {
             binding.tvMessage.text = message
+
+            val str = message
+            val delim = ","
+            val arr = str.split(delim).toTypedArray()
+
             var vind = binding.ivVindAngle
+            var boatAngle = binding.ivBoatAngle
+            var degre : Float? = arr[0].toFloatOrNull()
+            var degre1 : Float? = arr[1].toFloatOrNull()
+            if (degre != null) {
+                boatAngle.rotation = degre
+            }
+            if (degre1 != null) {
+                vind.rotation = degre1
+            }
+
+
+
+            //--------------------------------------------
+            /*var vind = binding.ivVindAngle
             var boatAngle = binding.ivBoatAngle
             var degre = message.toFloatOrNull()
             if (degre != null) {
                 vind.rotation = degre * 4
                 boatAngle.rotation = degre
+                }
+             */
 
-            }
+
 
         }
 

@@ -1,7 +1,5 @@
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
-import android.util.Log
-import android.widget.Toast
 import com.example.bt_monitor_kotlin_01.ReceiveThread
 import java.io.IOException
 import java.util.*
@@ -21,13 +19,13 @@ class ConnectThread(private val device: BluetoothDevice, private val listener: R
 
     override fun run() {
         try {
-            listener.onReceive("Connecting...")
+            //listener.onReceive("Connecting...")
             mSocket?.connect()
-            listener.onReceive("Connected")
+            //listener.onReceive("Connected")
             rThread = ReceiveThread(mSocket!!, listener)
             rThread.start()
         }catch (i: IOException){
-            listener.onReceive("Can not connect to device")
+            //listener.onReceive("Can not connect to device")
             closeConnection()
         }
     }
